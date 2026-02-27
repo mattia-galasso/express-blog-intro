@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 const appURL = `http://localhost:${port}`;
 const appPost = [
-  +{
+  {
     title: "Torta al cioccolato rustica fatta in casa",
     content:
       "Una torta dal sapore intenso e dalla consistenza morbida, perfetta per la colazione o per una pausa dolce. L’aggiunta di agrumi dona un tocco fresco che bilancia il cioccolato.",
@@ -41,8 +41,19 @@ const appPost = [
 ];
 
 //* Middlewave Assets
+app.use(express.static("public"));
 
 //* Routes
 app.get("/", (req, res) => {
-  console.log("Server del mio blog");
+  res.json("Server del mio blog");
+});
+app.get("/bacheca", (req, res) => {
+  const responseData = {
+    result: appPost,
+  };
+  res.json(responseData);
+});
+
+app.listen(port, () => {
+  console.log(`Server listenting on ${appURL}`);
 });
